@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>NexPlayer</title>
+	<style type="text/css">
+		body {
+			background: #191828;
+			color: #efedef;
+			overflow: hidden;
+		}
+
+		#player_container {
+			position: relative;
+			padding-top: 28%;
+			padding-bottom: 28%;
+			left: 28%;
+		}
+
+		#player {
+			background-color: #191828;
+			position: absolute;
+			top: 0%;
+			width: 50%;
+			height: 50%;
+		}
+
+		#warning {
+			background-color: red;
+			text-align: center;
+			display: none;
+		}
+
+	</style>
+	<script src="https://src.litix.io/core/4/mux.js"></script>  
+
+</head>
+
+<body>
+	<div id="player_container">
+		<div id="player" width="560" height="315"></div>
+	</div>
+	<script src="https://nexplayer.nexplayersdk.com/5.5.3.1/nexplayer.js"></script>
+	<script src="app/NexMuxHandShake.js"></script>
+	<script src="app/config.js"></script>
+
+	<script>
+		
+		window.muxPlayerInitTime = Date.now();
+
+		var player = null;
+		var videoElem = null;
+
+		var callBackWithPlayers = function (nexplayerInstance, videoElement) {
+			player = nexplayerInstance;
+			videoElem = videoElement;
+
+			videoElem.addEventListener("loadeddata", function() {
+        NexMux = new NexMuxHandShake();
+        NexMux.useAdMetrics = true;
+        NexMux.initMuxData();
+      });
+		}
+
+		nexplayer.Setup({
+          key: 'YOUR NEXPLAYER KEY',
+          div: document.getElementById('player'),
+          callbacksForPlayer: callBackWithPlayers,
+          src: url,
+          autoplay: true, // Optional
+          mutedAtStart: true, // Optional
+          debug: true,// Optional
+          vast: 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=vmap&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ar%3Dpremidpost&cmsid=496&vid=short_onecue&correlator=64565431654546',
+        });
+
+	</script>
+</body>
+
+</html>
