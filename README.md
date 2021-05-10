@@ -1,7 +1,6 @@
 ![NexPlayer demo home ](images/nexplayer-logo.png)
 
-# NexPlayer™ HTML5 Mux Data Integration
-Integration of NexPlayer HTML5 with Mux Data
+# Integration of NexPlayer HTML5 with Mux Data
 
 [NexPlayer™ HTML5](https://nexplayersdk.com/nexplayer-html5/) is a multi-screen streaming player that enables HLS and DASH live streaming across all browsers and platforms with the highest video quality. NexPlayer™ HTML5 supports an advanced feature set that includes DRM, Closed Captioning, Time Shifting and 360 video playback among many others.
 
@@ -13,8 +12,8 @@ This repository contains the sample demo code of NexPlayer™ HTML5 with the int
 
 ```html
 <head>
-	<script type="text/javascript" src="https://src.litix.io/core/4/mux.js"></script>
-    <script>window.muxPlayerInitTime = Date.now()</script>
+  <script type="text/javascript" src="https://src.litix.io/core/4/mux.js"></script>
+  <script>window.muxPlayerInitTime = Date.now()</script>
 </head>
 ```
 
@@ -48,15 +47,19 @@ This repository contains the sample demo code of NexPlayer™ HTML5 with the int
 
 ```javascript
 
+    let nexMux = null;
+
     var callBackWithPlayers = function (nexplayerInstance, videoElement) {
+
       player = nexplayerInstance;
       videoElem = videoElement;
 
       videoElem.addEventListener("loadeddata", function() {
-        NexMux = new NexMuxHandShake();
+
+        nexMux = new NexMuxHandShake();
         // To use ad metrics, set useAdMetrics to true, it is set to false by default.
-        NexMux.useAdMetrics = true;
-        NexMux.initMuxData();
+        nexMux.useAdMetrics = true;
+        nexMux.initMuxData();
       });
     }
 ```
@@ -64,13 +67,13 @@ This repository contains the sample demo code of NexPlayer™ HTML5 with the int
 - If your application plays multiple videos back-to-back in the same video player, you should modify the muxConfig variable created in config.js an then use the following code.
 
 ```javascript
-NexMux.videoChange(muxConfig);
+nexMux.videoChange(muxConfig);
 ```
 
 - In some cases, you may have the program change within a stream, and you may want to track each program as a view on its own. To do so you should modify the muxConfig variable created in config.js an then use the following code.
 
 ```javascript
-NexMux.programChange(muxConfig);
+nexMux.programChange(muxConfig);
 ```
 
 -------------------

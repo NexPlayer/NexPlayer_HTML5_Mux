@@ -52,16 +52,19 @@
 
 		var player = null;
 		var videoElem = null;
+		let nexMux = null;
 
 		var callBackWithPlayers = function (nexplayerInstance, videoElement) {
+
 			player = nexplayerInstance;
 			videoElem = videoElement;
 
 			videoElem.addEventListener("loadeddata", function() {
-        NexMux = new NexMuxHandShake();
-        NexMux.useAdMetrics = true;
-        NexMux.initMuxData();
-      });
+
+				nexMux = new NexMuxHandShake();
+				nexMux.useAdMetrics = true;
+				nexMux.initMuxData();
+      		});
 		}
 
 		nexplayer.Setup({
