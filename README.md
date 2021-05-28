@@ -17,16 +17,46 @@ This repository contains the sample demo code of NexPlayer™ HTML5 with the int
 </head>
 ```
 
-- The folders "app" include the script that should be included in the HTML file:
+- The folder "app" include the script that should be included in the HTML file:
 
 ```html
 <script type="text/javascript" src="app/NexMuxHandShake.js"></script>
-<script type="text/javascript" src="app/config.js"></script>
 ```
 
 - Get your ENV_KEY from the [Mux environments dashboard](https://dashboard.mux.com/login).
 
-- Configure your settings in "app/configs.js".
+- Create your muxConfiguration variable with the following structure:
+
+```javascript
+  var muxConfiguration = {
+
+    debug: true,
+    disableCookies: true,
+    respectDoNotTrack: true,
+    automaticErrorTracking: false,
+    data: {
+      env_key: 'ENV_KEY', // required
+
+      // Site Metadata
+      viewer_user_id: '', // ex: '12345'
+      experiment_name: '', // ex: 'player_test_A'
+      sub_property_id: '', // ex: 'cus-1'
+
+      // Player Metadata
+      player_name: 'NexPlayer', // ex: 'My Main Player'
+      player_version:  '', // ex: '1.0.0'
+      player_init_time: window.muxPlayerInitTime, // ex: 1451606400000
+
+      // Video Metadata
+      video_id: '', // ex: 'abcd123'
+      video_title: '', // ex: 'My Great Video'
+      video_series: '', // ex: 'Weekly Great Videos'
+      video_duration: '', // in milliseconds, ex: 120000
+      video_stream_type: '', // 'live' or 'on-demand'
+      video_cdn: '' // ex: 'Fastly', 'Akamai'
+    },
+  };
+```
 
 - By default, Mux use a cookie to track playback across subsequent page views. This cookie includes information about the tracking of the viewer, such as an anonymized viewer ID that Mux generates for each user. None of this information is personally-identifiable, but you can disable the use of this cookie if desired.
 ```javascript
@@ -47,7 +77,7 @@ This repository contains the sample demo code of NexPlayer™ HTML5 with the int
 
 ```javascript
 
-    let nexMux = null;
+    var nexMux = null;
 
     var callBackWithPlayers = function (nexplayerInstance, videoElement) {
 
@@ -59,21 +89,21 @@ This repository contains the sample demo code of NexPlayer™ HTML5 with the int
         nexMux = new NexMuxHandShake();
         // To use ad metrics, set useAdMetrics to true, it is set to false by default.
         nexMux.useAdMetrics = true;
-        nexMux.initMuxData();
+        nexMux.initMuxData(muxConfiguration);
       });
     }
 ```
 
-- If your application plays multiple videos back-to-back in the same video player, you should modify the muxConfig variable created in config.js an then use the following code.
+- If your application plays multiple videos back-to-back in the same video player, you should use the following function and pass a data object with the same structure as the muxConfiguration.data object.
 
 ```javascript
-nexMux.videoChange(muxConfig);
+  nexMux.videoChange(data);
 ```
 
-- In some cases, you may have the program change within a stream, and you may want to track each program as a view on its own. To do so you should modify the muxConfig variable created in config.js an then use the following code.
+- In some cases, you may have the program change within a stream, and you may want to track each program as a view on its own. To do so you should use the following function and pass a data object with the same structure as the muxConfiguration.data object.
 
 ```javascript
-nexMux.programChange(muxConfig);
+  nexMux.programChange(data);
 ```
 
 -------------------
