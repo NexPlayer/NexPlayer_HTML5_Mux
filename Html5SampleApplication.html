@@ -4,7 +4,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<title>NexPlayer</title>
+	<title>NexPlayer · Mux</title>
+	<link rel="icon" href="https://i2.wp.com/html5.nexplayersdk.com/wp-content/uploads/2020/10/cropped-cropped-cropped-favicon3-1.png?fit=32%2C32&amp;ssl=1" sizes="32x32">
 	<style type="text/css">
 		body {
 			background: #191828;
@@ -42,8 +43,8 @@
 	<div id="player_container">
 		<div id="player" width="560" height="315"></div>
 	</div>
-	<script src="https://nexplayer.nexplayersdk.com/5.5.3.1/nexplayer.js"></script>
-	<script src="app/NexMuxHandShake.js"></script>
+	<script src="https://nexplayer.nexplayersdk.com/6.0.0/nexplayer.js"></script>
+	<script src="https://nexplayer.nexplayersdk.com/Mux/NexMuxHandShake.js"></script>
 
 	<script>
 		
@@ -90,7 +91,7 @@
 
 				nexMux = new NexMuxHandShake();
 				nexMux.useAdMetrics = true;
-				nexMux.initMuxData(muxConfiguration);
+				nexMux.initMuxData(player, videoElem.id, muxConfiguration);
 			});
 		}
 
