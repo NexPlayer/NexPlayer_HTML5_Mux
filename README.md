@@ -15,8 +15,8 @@ In order to use it, you need to import these files into the HTML and set the mux
 ```html
   <head>
     <script src="https://src.litix.io/core/4/mux.js"></script>
-		<script src="Nexplayer SDK latest release"></script>
-		<script src="https://nexplayer.nexplayersdk.com/Mux/NexMuxHandShake.js"></script>
+    <script src="Nexplayer SDK latest release"></script>
+    <script src="https://nexplayer.nexplayersdk.com/Mux/NexMuxHandShake.js"></script>
     <script>window.muxPlayerInitTime = Date.now()</script>
   </head>
 
