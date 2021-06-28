@@ -13,19 +13,20 @@ To start, you need to have an ENV_KEY from the <a href="https://dashboard.mux.co
 In order to use it, you need to import these files into the HTML and set the muxPlayerInitTime.
 
 ```html
-<head>
-  <script type="text/javascript" src="https://src.litix.io/core/4/mux.js"></script>
-  <script>window.muxPlayerInitTime = Date.now()</script>
-</head>
-<body>
-	<script type="text/javascript" src="https://nexplayer.nexplayersdk.com/Mux/NexMuxHandShake.js"></script>
-</body>
+  <head>
+    <script src="https://src.litix.io/core/4/mux.js"></script>
+		<script src="Nexplayer SDK latest release"></script>
+		<script src="https://nexplayer.nexplayersdk.com/Mux/NexMuxHandShake.js"></script>
+    <script>window.muxPlayerInitTime = Date.now()</script>
+  </head>
 
- ```
+```
 
- You can find <a href="https://github.com/NexPlayer/NexPlayer_HTML5_Mux/blob/main/app/NexMuxHandShake.js">NexMuxHandShake.js</a> in the following <a href="https://github.com/NexPlayer/NexPlayer_HTML5_Mux">repository</a>.
+You can find <a href="https://github.com/NexPlayer/NexPlayer_HTML5_Mux/blob/main/app/NexMuxHandShake.js">NexMuxHandShake.js</a> in the following <a href="https://github.com/NexPlayer/NexPlayer_HTML5_Mux">repository</a>.
 
- First you should create your muxConfiguration variable with the following structure:
+Nexplayer SDK [releases](https://nexplayer.github.io/NexPlayer_HTML5_Documentation/#/releases?id=releases-top)
+
+First you should create your muxConfiguration variable with the following structure:
 
 ```js
 var muxConfiguration = {
@@ -94,13 +95,13 @@ NexMuxHandshake should be created in the callBackWithPlayers after the event “
 If your application plays multiple videos back-to-back in the same video player, you should use the following function and pass a data object with the same structure as the muxConfiguration.data object.
 
 ```js
-nexMux.videoChange(videoElem.id, data);
+  nexMux.videoChange(videoElem.id, data);
  ```
 
 In some cases, you may have the program change within a stream, and you may want to track each program as a view on its own. To do so you should use the following function and pass a data object with the same structure as the muxConfiguration.data object.
 
 ```js
-nexMux.programChange(videoElem.id, data);
+  nexMux.programChange(videoElem.id, data);
 ```
 
 -------------------

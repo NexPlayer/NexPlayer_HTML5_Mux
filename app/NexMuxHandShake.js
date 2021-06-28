@@ -13,24 +13,24 @@ var NexMuxHandShake = function(){
       muxConfig.data.video_stream_type = (player.isLive() ? 'live' : 'on-demand');
 
       if (this.useAdMetrics) {
-        player.adManager().addImpressionListener(() => {mux.emit(videoElementId, 'adrequest', { ad_tag_url: '"' + player.adManager().getMediaUrl() + '"'})});
-        player.adManager().addStartedListener(() => {mux.emit(videoElementId, 'adbreakstart')});
-        player.adManager().addPausedListener(() => {mux.emit(videoElementId, 'adpause')});
-        player.adManager().addResumedListener(() => {mux.emit(videoElementId, 'adplay')});
-        player.adManager().addFirstQuartileListener(() => {mux.emit(videoElementId, 'adfirstquartile')});
-        player.adManager().addMidpointListener(() => {mux.emit(videoElementId, 'admidpoint')});
-        player.adManager().addThirdQuartileListener(() => {mux.emit(videoElementId, 'adthirdquartile')});
-        player.adManager().addCompleteListener(() => {mux.emit(videoElementId, 'adbreakend')});
-        player.adManager().addErrorListener(() => {mux.emit(videoElementId, 'aderror')});
+        player.adManager().addImpressionListener(() => {mux.emit("#" + videoElementId, 'adrequest', { ad_tag_url: '"' + player.adManager().getMediaUrl() + '"'})});
+        player.adManager().addStartedListener(() => {mux.emit("#" + videoElementId, 'adbreakstart')});
+        player.adManager().addPausedListener(() => {mux.emit("#" + videoElementId, 'adpause')});
+        player.adManager().addResumedListener(() => {mux.emit("#" + videoElementId, 'adplay')});
+        player.adManager().addFirstQuartileListener(() => {mux.emit("#" + videoElementId, 'adfirstquartile')});
+        player.adManager().addMidpointListener(() => {mux.emit("#" + videoElementId, 'admidpoint')});
+        player.adManager().addThirdQuartileListener(() => {mux.emit("#" + videoElementId, 'adthirdquartile')});
+        player.adManager().addCompleteListener(() => {mux.emit("#" + videoElementId, 'adbreakend')});
+        player.adManager().addErrorListener(() => {mux.emit("#" + videoElementId, 'aderror')});
       };
 
       player.on(nexplayer.Player.NexEvent.Track_Change, function() {
 
         if (player.getCurrentTrack().bitrate > 0) {
-          mux.emit(videoElementId, 'renditionchange', { video_source_bitrate: player.getCurrentTrack().bitrate});
+          mux.emit("#" + videoElementId, 'renditionchange', { video_source_bitrate: player.getCurrentTrack().bitrate});
         }
       });
-      mux.monitor(videoElementId, muxConfig);
+      mux.monitor("#" + videoElementId, muxConfig);
     } else {
       console.error("There is not env_key provided");
     }
@@ -39,7 +39,7 @@ var NexMuxHandShake = function(){
   this.videoChange = function (videoElementId, data) {
 
     if (data.env_key !== undefined && data.env_key !== null) {
-      mux.emit(videoElementId, 'videochange', data);
+      mux.emit("#" + videoElementId, 'videochange', data);
     } else {
       console.error("There is not env_key provided");
     }
@@ -48,7 +48,7 @@ var NexMuxHandShake = function(){
   this.programChange = function (videoElementId, data) {
 
     if (data.env_key !== undefined && data.env_key !== null) {
-      mux.emit(videoElementId, 'programchange', data);
+      mux.emit("#" + videoElementId, 'programchange', data);
     } else {
       console.error("There is not env_key provided");
     }
